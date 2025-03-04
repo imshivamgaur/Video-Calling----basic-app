@@ -135,7 +135,6 @@ const RoomPage = () => {
                   padding: "5px",
                 }}
                 playing
-                muted
                 height="150px"
                 width="200px"
                 url={myStream}
@@ -154,7 +153,6 @@ const RoomPage = () => {
                   padding: "5px",
                 }}
                 playing
-                muted
                 height="150px"
                 width="200px"
                 url={remoteStream}

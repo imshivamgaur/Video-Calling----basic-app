@@ -1,8 +1,18 @@
 import { Server } from "socket.io";
+import express from "express";
+import http from "http";
+import cors from "cors";
 
+const app = express();
 const PORT = process.env.PORT || 8000;
 
-const io = new Server(PORT, {
+// middleware
+app.use(cors());
+
+// create an HTTP server
+const server = http.createServer(app);
+
+const io = new Server(server, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
@@ -43,4 +53,9 @@ io.on("connection", (socket) => {
   socket.on("peer:nego:done", ({ to, ans }) => {
     io.to(to).emit("peer:nego:final", { from: socket.id, ans });
   });
+});
+
+// start Server
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
