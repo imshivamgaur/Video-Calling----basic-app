@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import peer from "../service/peer";
 import { useSocket } from "../context/SocketProvider";
+import "../index.css"
 
 const RoomPage = () => {
   const socket = useSocket();
@@ -118,47 +119,49 @@ const RoomPage = () => {
   ]);
 
   return (
-    <div style={{}}>
-      <h1>Room Page</h1>
-      <h4>{remoteSocketId ? "Connected" : "No one in the room"}</h4>
-      {myStream && <button onClick={sendStreams}>Send Stream</button>}
-      {remoteSocketId && <button onClick={handleCallUser}>Call</button>}
-      <div style={{ display: "flex", gap: "50px" }}>
+    <div className="room-container">
+      <h1 className="room-title">Room Page</h1>
+      <h4 className="connection-status">
+        {remoteSocketId ? "✅ Connected" : "❌ No one in the room"}
+      </h4>
+
+      <div className="button-group">
         {myStream && (
-          <div >
-            <div style={{ marginTop: "40px" }}>
-              <h3>Your Stream</h3>
-              <ReactPlayer
-                style={{
-                  border: "2px solid black",
-                  borderRadius: "8px",
-                  padding: "5px",
-                }}
-                playing
-                height="150px"
-                width="200px"
-                url={myStream}
-              />
-            </div>
+          <button onClick={sendStreams} className="room-button send-button">
+            Send Stream
+          </button>
+        )}
+        {remoteSocketId && (
+          <button onClick={handleCallUser} className="room-button call-button">
+            Call
+          </button>
+        )}
+      </div>
+
+      <div className="streams-container">
+        {myStream && (
+          <div className="stream-box">
+            <h3 className="stream-title">Your Stream</h3>
+            <ReactPlayer
+              className="video-player"
+              playing
+              height="150px"
+              width="200px"
+              url={myStream}
+            />
           </div>
         )}
         {remoteStream && (
-          <>
-            <div style={{ marginTop: "40px" }}>
-              <h3>Remote Stream</h3>
-              <ReactPlayer
-                style={{
-                  border: "2px solid black",
-                  borderRadius: "8px",
-                  padding: "5px",
-                }}
-                playing
-                height="150px"
-                width="200px"
-                url={remoteStream}
-              />
-            </div>
-          </>
+          <div className="stream-box">
+            <h3 className="stream-title">Remote Stream</h3>
+            <ReactPlayer
+              className="video-player"
+              playing
+              height="150px"
+              width="200px"
+              url={remoteStream}
+            />
+          </div>
         )}
       </div>
     </div>

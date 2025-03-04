@@ -33,44 +33,47 @@ const LobbyScreen = () => {
   }, [socket, handleJoinRoom]);
 
   return (
-    <div>
-      <h1>Lobby</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email Id</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={userInputs.email}
-            onChange={(e) =>
-              setUserInputs((prev) => ({
-                ...prev,
-                [e.target.name]: e.target.value,
-              }))
-            }
-          />
-        </div>
-        <div>
-          <label htmlFor="room">Room Id</label>
-          <input
-            type="number"
-            id="room"
-            name="room"
-            value={userInputs.room}
-            onChange={(e) =>
-              setUserInputs((prev) => ({
-                ...prev,
-                [e.target.name]: e.target.value,
-              }))
-            }
-          />
-        </div>
-        <div>
-          <button>Join</button>
-        </div>
-      </form>
+    <div className="lobby-container">
+  <h1>Lobby Screen</h1>
+  <form onSubmit={handleSubmit} className="lobby-form">
+    <div className="form-group">
+      <label htmlFor="email" className="form-label">Email Id</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        className="form-input"
+        value={userInputs.email}
+        onChange={(e) =>
+          setUserInputs((prev) => ({
+            ...prev,
+            [e.target.name]: e.target.value,
+          }))
+        }
+      />
     </div>
+    <div className="form-group">
+      <label htmlFor="room" className="form-label">Room Id</label>
+      <input
+        type="number"
+        id="room"
+        name="room"
+        className="form-input"
+        value={userInputs.room}
+        onChange={(e) =>
+          setUserInputs((prev) => ({
+            ...prev,
+            [e.target.name]: e.target.value,
+          }))
+        }
+      />
+    </div>
+    <div className="form-group">
+      <button className="form-button">Join</button>
+    </div>
+  </form>
+</div>
+
   );
 };
 
