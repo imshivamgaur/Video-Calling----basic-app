@@ -1,8 +1,15 @@
 import { Server } from "socket.io";
 
-const io = new Server(8000, {
-  cors: true,
+const PORT = process.env.PORT || 8000;
+
+const io = new Server(PORT, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
 });
+
+console.log(`WebSocket server running on port ${PORT}`);
 
 const emailToSocketIdMap = new Map();
 const socketIdToEmailMap = new Map();
